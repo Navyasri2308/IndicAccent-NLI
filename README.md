@@ -1,134 +1,223 @@
-# IndicAccent Classification using HuBERT and MFCC
+# Native Language Identification (NLI) of Indian English Speakers  
+### Using HuBERT, MFCC, and Deep Learning
 
-<div align="center">
-  
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-red)
-![License](https://img.shields.io/badge/License-MIT-green)
+---
 
-**Indian English Accent Classification using Deep Learning**
-
-</div>
-
-## Table of Contents
-- [Installation](#installation)
-- [Quick Start](#quick-start) 
-- [Models](#models)
+## 📌 Table of Contents
+- [Project Overview](#project-overview)
 - [Dataset](#dataset)
+- [Project Structure](#project-structure)
+- [Feature Extraction](#feature-extraction)
+  - [MFCC Extraction](#mfcc-extraction)
+  - [HuBERT Embeddings](#hubert-embeddings)
+- [Models](#models)
+  - [MLP Classifier](#mlp-classifier)
+  - [LSTM Model](#lstm-model)
+  - [HuBERT Layer Analysis](#hubert-layer-analysis)
+- [Training Pipeline](#training-pipeline)
 - [Results](#results)
-- [Usage](#usage)
-- [Citation](#citation)
+  - [MFCC vs HuBERT](#mfcc-vs-hubert)
+  - [Age Generalization](#age-generalization)
+  - [Word vs Sentence Analysis](#word-vs-sentence-analysis)
+- [Visualization Outputs](#visualization-outputs)
+- [Checkpoints](#checkpoints)
+  - [How to Load Checkpoints](#how-to-load-checkpoints)
+- [How to Run](#how-to-run)
+  - [Google Colab Version](#google-colab-version)
+- [Future Work](#future-work)
 - [License](#license)
 
-## Installation
+---
 
-<a name="installation"></a>
+## 📌 Project Overview
+Native Language Identification (NLI) aims to classify the **native language (L1)** of Indian English speakers based on accent patterns.  
+This project compares **traditional MFCC acoustic features** with **self-supervised HuBERT representations**.
 
-```bash
-# Clone repository
-git clone https://github.com/yourusername/IndicAccent-NLI.git
-cd IndicAccent-NLI
+We evaluate:
+- Accent cues captured by MFCCs  
+- HuBERT layer-wise representation quality  
+- Age-based generalization  
+- Word-level vs sentence-level speech  
 
-# Install dependencies
+---
+
+## 📌 Dataset
+This project uses:
+
+### **IndicAccentDB**
+- Contains English audio by Indian speakers  
+- Includes metadata (region, age, gender, etc.)  
+- Balanced across 8+ native languages  
+
+Loaded using HuggingFace:
+
+```python
+
+📌 Project Structure
+📁 NLI_Project
+│── dataset/
+│── models/
+│── checkpoints/
+│── notebooks/
+│── src/
+│   ├── mfcc_extraction.py
+│   ├── hubert_features.py
+│   ├── train.py
+│   ├── evaluate.py
+│── README.md
+│── requirements.txt
+
+📌 Feature Extraction
+### 🎧 MFCC Extraction
+
+40-dimensional MFCCs
+
+Frame size: 25 ms
+
+Hop length: 10 ms
+
+import librosa
+mfcc = librosa.feature.mfcc(y, sr=16000, n_mfcc=40)
+
+### 🤖 HuBERT Embeddings
+
+Using:
+
+facebook/hubert-large-ll60k
+
+
+Extracting hidden states from all 24 layers.
+
+processor = Wav2Vec2Processor.from_pretrained("facebook/hubert-large-ll60k")
+model = HubertModel.from_pretrained("facebook/hubert-large-ll60k")
+
+📌 Models
+### 🔹 MLP Classifier
+
+Used mainly for MFCC feature classification.
+
+### 🔹 LSTM Model
+
+Processes temporal sequences of MFCC/HuBERT features.
+
+### 🔹 HuBERT Layer Analysis
+
+We analyze which HuBERT hidden layer gives best performance.
+
+Example:
+
+Layer 9 → Best for phonetic info
+
+Layer 19 → Best for accent classification
+
+📌 Training Pipeline
+
+Load dataset
+
+Extract MFCC / HuBERT features
+
+Train models
+
+Evaluate
+
+Generate plots
+
+Save checkpoints
+
+📌 Results
+### ⭐ MFCC vs HuBERT
+Feature	Accuracy
+MFCC	~70%
+HuBERT Layer 19	~89%
+HuBERT Mean-pooled	~82%
+### 👶 Age Generalization
+
+Models trained on adults generalize well to 10–17 age group with HuBERT features.
+
+### 🗣 Word vs Sentence Analysis
+
+Sentence-level recordings give higher accuracy.
+
+📌 Visualization Outputs
+
+Generated automatically:
+
+Confusion Matrix
+
+Training Curves
+
+Layer-wise HuBERT Accuracy Plot
+
+Age-group Comparison
+
+MFCC vs HuBERT Comparison
+
+📌 Checkpoints
+
+Saved in:
+
+/checkpoints/
+
+
+Includes:
+
+mfcc_mlp.pt
+
+hubert_lstm.pt
+
+hubert_layer_19.pt
+
+hubert_mean_pool.pt
+
+### 🔧 How to Load Checkpoints
+model.load_state_dict(torch.load("checkpoints/hubert_layer_19.pt"))
+model.eval()
+
+📌 How to Run
+
+Install dependencies:
+
 pip install -r requirements.txt
 
-Requirements:
 
-Python 3.8+
-PyTorch 2.0+
-Transformers
-Librosa
-Scikit-learn
+Run the main script:
 
-## Quick Start
-<a name="quick-start"></a>
+python src/train.py
 
-python
-# Run main notebook
-jupyter notebook IndicAccent_NLI_HuBERT_MFCC.ipynb
+📌 Google Colab Version
 
-# Or use directly
-from indicaccent import AccentClassifier
-classifier = AccentClassifier('hubert')
-prediction = classifier.predict('audio.wav')
+➡️ Upload the notebook:
+IndicAccent_NLI_HuBERT_MFCC.ipynb
 
-## Models
-<a name="models"></a>
+Run all cells — code is fully compatible with Colab.
 
-1. HuBERT Classifier
-Pre-trained HuBERT embeddings
+📌 Future Work
 
-Transformer-based features
+Add wav2vec2 and WavLM comparison
 
-High accuracy
+Add speaker diarization
 
-2. MFCC Classifier
-13 MFCC coefficients
+Explore multilingual NLI
 
-Delta and delta-delta features
+Improve dataset balancing
 
-Fast inference
+📌 License
 
-3. Ensemble
-Combines HuBERT + MFCC
+MIT License
+Free for research & educational use.
 
-Best performance
 
-## Dataset
-<a name="dataset"></a>
+---
 
-IndicAccentDB - Indian English accents dataset
+# ✅ YOUR README IS READY
 
-Multiple regional accents
+If you want, I can also:
 
-WAV audio format
+✔ convert it into a **PDF**  
+✔ add **badges** (Python, HuggingFace, PyTorch, Colab)  
+✔ add **images or diagrams**  
+✔ add **your checkpoints section with links**
 
-2,300+ samples
-
-Karnataka, Kerala regions
-
-## Results
-<a name="results"></a>
-
-Model	Accuracy	F1-Score
-HuBERT	89.5%	89.3%
-MFCC	81.7%	81.4%
-Ensemble	91.2%	91.0%
-
-##Usage
-<a name="usage"></a>
-
-Training
-python
-from indicaccent.trainer import Trainer
-
-trainer = Trainer(model='hubert')
-trainer.fit(train_data, val_data, epochs=50)
-
-Prediction
-python
-classifier = AccentClassifier()
-result = classifier.predict('path/to/audio.wav')
-print(f"Accent: {result}")
-Feature Extraction
-python
-from indicaccent.features import extract_features
-
-hubert_features = extract_hubert_features(audio)
-mfcc_features = extract_mfcc_features(audio)
-
-## Citation
-<a name="citation"></a>
-
-bibtex
-@misc{indicaccent2024,
-  title={IndicAccent Classification using HuBERT and MFCC},
-  author={Your Name},
-  year={2024},
-  url={https://github.com/yourusername/IndicAccent-NLI}
-}
-
-##License
-<a name="license"></a>
-
-MIT License - see LICENSE file for details.
+Just tell me **“generate PDF”** or **“add badges”** etc.
+from datasets import load_dataset
+dataset = load_dataset("DarshanaS/IndicAccentDb")
