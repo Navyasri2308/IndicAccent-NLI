@@ -1,7 +1,5 @@
 # Native Language Identification (NLI) of Indian English Speakers
 
-🔗 **GitHub Repository:** [https://github.com/Navyasri2308/IndicAccent-NLI](https://github.com/Navyasri2308/IndicAccent-NLI)
-
 <div align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
