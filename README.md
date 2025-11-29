@@ -22,12 +22,17 @@
 
 ## Installation
 
+<a name="installation"></a>
+
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/IndicAccent-NLI.git
 cd IndicAccent-NLI
 
-### Requirements:
+# Install dependencies
+pip install -r requirements.txt
+
+Requirements:
 
 Python 3.8+
 PyTorch 2.0+
@@ -35,7 +40,9 @@ Transformers
 Librosa
 Scikit-learn
 
-Quick Start
+## Quick Start
+<a name="quick-start"></a>
+
 python
 # Run main notebook
 jupyter notebook IndicAccent_NLI_HuBERT_MFCC.ipynb
@@ -45,7 +52,9 @@ from indicaccent import AccentClassifier
 classifier = AccentClassifier('hubert')
 prediction = classifier.predict('audio.wav')
 
-### Models
+## Models
+<a name="models"></a>
+
 1. HuBERT Classifier
 Pre-trained HuBERT embeddings
 
@@ -59,12 +68,15 @@ High accuracy
 Delta and delta-delta features
 
 Fast inference
+
 3. Ensemble
 Combines HuBERT + MFCC
 
 Best performance
 
-### Dataset
+## Dataset
+<a name="dataset"></a>
+
 IndicAccentDB - Indian English accents dataset
 
 Multiple regional accents
@@ -75,13 +87,17 @@ WAV audio format
 
 Karnataka, Kerala regions
 
-### Results
+## Results
+<a name="results"></a>
+
 Model	Accuracy	F1-Score
 HuBERT	89.5%	89.3%
 MFCC	81.7%	81.4%
 Ensemble	91.2%	91.0%
 
-### Usage
+##Usage
+<a name="usage"></a>
+
 Training
 python
 from indicaccent.trainer import Trainer
@@ -89,7 +105,7 @@ from indicaccent.trainer import Trainer
 trainer = Trainer(model='hubert')
 trainer.fit(train_data, val_data, epochs=50)
 
-###  Prediction
+Prediction
 python
 classifier = AccentClassifier()
 result = classifier.predict('path/to/audio.wav')
@@ -101,7 +117,9 @@ from indicaccent.features import extract_features
 hubert_features = extract_hubert_features(audio)
 mfcc_features = extract_mfcc_features(audio)
 
-### Citation
+## Citation
+<a name="citation"></a>
+
 bibtex
 @misc{indicaccent2024,
   title={IndicAccent Classification using HuBERT and MFCC},
@@ -109,8 +127,8 @@ bibtex
   year={2024},
   url={https://github.com/yourusername/IndicAccent-NLI}
 }
-### License
-MIT License - see LICENSE file for details.
 
-# Install dependencies
-pip install -r requirements.txt
+##License
+<a name="license"></a>
+
+MIT License - see LICENSE file for details.
