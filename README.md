@@ -1,5 +1,50 @@
+# IndicAccent Classification using HuBERT and MFCC
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-red)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+**Indian English Accent Classification using Deep Learning**
+
+</div>
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Quick Start](#quick-start)
+* [Models](#models)
+* [Dataset](#dataset)
+* [Results](#results)
+* [Usage](#usage)
+* [Citation](#citation)
+* [License](#license)
+
+## Installation
+
+<a name="installation"></a>
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/IndicAccent-NLI.git
+cd IndicAccent-NLI
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+---
+
 # Native Language Identification (NLI) of Indian English Speakers
 
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![HuBERT](https://img.shields.io/badge/HuBERT-24--Layer-yellow)
+![MFCC](https://img.shields.io/badge/MFCC-40coeff-red)
+
+</div>
 Using HuBERT & MFCC
 
 ---
@@ -31,6 +76,7 @@ Using HuBERT & MFCC
 * [How to Run](#how-to-run)
 
   * [Google Colab Version](#google-colab-version)
+* [Future Work](#future-work)
 * [License](#license)
 
 ---
@@ -194,58 +240,49 @@ Findings:
 ### MFCC vs HuBERT
 
 ```
-Feature Type	Accuracy
-MFCC	~70%
-HuBERT Mean-Pooled	~82%
-HuBERT Layer 19	~89%
+Feature Type    Accuracy
+MFCC            ~70%
+HuBERT Mean     ~82%
+HuBERT L19      ~89%
 ```
 
 Conclusion: **HuBERT significantly outperforms MFCC.**
 
 ### Age Generalization
 
-We evaluate generalization from adults (18+) to youth speakers (10–17).
+We evaluate adults (18+) → youth (10–17).
 
-* MFCC: Accuracy drops by 20–25%
-* HuBERT: Accuracy drops only 3–5%
-
-Conclusion: **HuBERT is robust across age groups.**
+* MFCC: -20–25%
+* HuBERT: -3–5%
 
 ### Word vs Sentence Analysis
 
-Sentence-level clips contain longer accent cues → better accuracy.
+Sentence-level provides best accent cues.
 
 ```
-Type	Accuracy
-Word-level	68%
-Sentence-level	88%
+Word-level: 68%
+Sentence-level: 88%
 ```
 
 ## Visualization Outputs
 
-The project generates:
+Generated:
 
 * Confusion matrix
 * HuBERT layer-wise accuracy plot
-* Loss and accuracy curves
-* MFCC vs HuBERT comparison chart
+* Loss/accuracy curves
+* MFCC vs HuBERT comparison
 * Age generalization chart
-
-All plots are saved in:
-
-```
-/outputs/plots/
-```
 
 ## Checkpoints
 
-Saved in:
+Stored in:
 
 ```
 /checkpoints/
 ```
 
-Available models:
+Models:
 
 * mfcc_mlp.pt
 * hubert_meanpool_mlp.pt
@@ -265,19 +302,19 @@ model.eval()
 
 ## How to Run
 
-Install dependencies:
+Install:
 
 ```
 pip install -r requirements.txt
 ```
 
-Run training:
+Train:
 
 ```
 python src/train.py
 ```
 
-Run evaluation:
+Evaluate:
 
 ```
 python src/evaluate.py
@@ -285,19 +322,20 @@ python src/evaluate.py
 
 ### Google Colab Version
 
-You can run the full pipeline using the notebook:
-
 ```
 IndicAccent_NLI_HuBERT_MFCC.ipynb
 ```
 
-Or directly open the Colab link:
-
+Or open directly:
 **Colab Link:** [https://colab.research.google.com/drive/1KrEQ4gFuzky7-14yAZAKGSBeXtcIcL9q?usp=sharing](https://colab.research.google.com/drive/1KrEQ4gFuzky7-14yAZAKGSBeXtcIcL9q?usp=sharing)
 
-Simply upload or open the notebook in Google Colab and run all cells.
+## Future Work
+
+* Add WavLM, Whisper, Wav2Vec2 comparisons
+* Speaker normalization
+* Inference API
+* GUI demo
 
 ## License
 
-MIT License
-Free for research and academic use.
+MIT License — free for research & academic use.
