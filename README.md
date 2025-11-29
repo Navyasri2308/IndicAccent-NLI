@@ -1,58 +1,116 @@
-# IndicAccent NLI: Indian Accent Classification using HuBERT and MFCC
+# IndicAccent Classification using HuBERT and MFCC
 
 <div align="center">
-
+  
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-red)
-![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-**A comprehensive framework for Indian accent classification using deep learning approaches**
-
-[Installation](#installation) • [Quick Start](#quick-start) • [Models](#models) • [Results](#results) • [Citation](#citation)
+**Indian English Accent Classification using Deep Learning**
 
 </div>
 
-## 📖 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
+## Table of Contents
 - [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Dataset](#dataset)
+- [Quick Start](#quick-start) 
 - [Models](#models)
-- [Training](#training)
+- [Dataset](#dataset)
 - [Results](#results)
+- [Usage](#usage)
 - [Citation](#citation)
-- [Contributing](#contributing)
 - [License](#license)
 
-## 🎯 Overview
+## Installation
 
-This project implements a Natural Language Inference (NLI) system for classifying Indian English accents using state-of-the-art deep learning techniques. We combine transformer-based speech representations (HuBERT) with traditional audio features (MFCC) to achieve robust accent classification across multiple Indian regions.
-
-### Key Features
-- 🎵 **Multi-modal feature extraction** (HuBERT + MFCC)
-- 🏗️ **Modular architecture** for easy experimentation
-- 📊 **Comprehensive evaluation** metrics and visualizations
-- 🔄 **Reproducible research** with detailed documentation
-- ⚡ **GPU-accelerated** training and inference
-
-## ⚡ Installation
-
-### Prerequisites
-- Python 3.8+
-- CUDA-capable GPU (recommended)
-- 8GB+ RAM
-
-### Install from Source
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/IndicAccent-NLI.git
 cd IndicAccent-NLI
 
+### Requirements:
+
+Python 3.8+
+PyTorch 2.0+
+Transformers
+Librosa
+Scikit-learn
+
+Quick Start
+python
+# Run main notebook
+jupyter notebook IndicAccent_NLI_HuBERT_MFCC.ipynb
+
+# Or use directly
+from indicaccent import AccentClassifier
+classifier = AccentClassifier('hubert')
+prediction = classifier.predict('audio.wav')
+
+### Models
+1. HuBERT Classifier
+Pre-trained HuBERT embeddings
+
+Transformer-based features
+
+High accuracy
+
+2. MFCC Classifier
+13 MFCC coefficients
+
+Delta and delta-delta features
+
+Fast inference
+3. Ensemble
+Combines HuBERT + MFCC
+
+Best performance
+
+### Dataset
+IndicAccentDB - Indian English accents dataset
+
+Multiple regional accents
+
+WAV audio format
+
+2,300+ samples
+
+Karnataka, Kerala regions
+
+### Results
+Model	Accuracy	F1-Score
+HuBERT	89.5%	89.3%
+MFCC	81.7%	81.4%
+Ensemble	91.2%	91.0%
+
+### Usage
+Training
+python
+from indicaccent.trainer import Trainer
+
+trainer = Trainer(model='hubert')
+trainer.fit(train_data, val_data, epochs=50)
+
+###  Prediction
+python
+classifier = AccentClassifier()
+result = classifier.predict('path/to/audio.wav')
+print(f"Accent: {result}")
+Feature Extraction
+python
+from indicaccent.features import extract_features
+
+hubert_features = extract_hubert_features(audio)
+mfcc_features = extract_mfcc_features(audio)
+
+### Citation
+bibtex
+@misc{indicaccent2024,
+  title={IndicAccent Classification using HuBERT and MFCC},
+  author={Your Name},
+  year={2024},
+  url={https://github.com/yourusername/IndicAccent-NLI}
+}
+### License
+MIT License - see LICENSE file for details.
+
 # Install dependencies
 pip install -r requirements.txt
-
-# Install in development mode
-pip install -e .
