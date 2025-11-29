@@ -3,8 +3,8 @@
 <div align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![HuBERT](https://img.shields.io/badge/HuBERT-24--Layer-yellow)
-![MFCC](https://img.shields.io/badge/MFCC-40coeff-red)
+[![HuBERT](https://img.shields.io/badge/HuBERT-24--Layer-yellow)](#hubert-embeddings)
+[![MFCC](https://img.shields.io/badge/MFCC-40coeff-red)](#mfcc-extraction)
 
 </div>
 Using HuBERT & MFCC
