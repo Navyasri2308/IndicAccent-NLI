@@ -6,7 +6,7 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-red)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-**Indian English Accent Classification using Deep Learning**
+**Indian English Accent Classification**
 
 </div>
 
