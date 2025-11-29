@@ -31,7 +31,6 @@ Using HuBERT & MFCC
 * [How to Run](#how-to-run)
 
   * [Google Colab Version](#google-colab-version)
-* [Future Work](#future-work)
 * [License](#license)
 
 ---
